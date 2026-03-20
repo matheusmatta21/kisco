@@ -3,7 +3,8 @@ import { CardSmall } from "@/components/CardTest";
 export default function Home() {
   return (
     <div className="min-h-screen ">
-      <div className="relative bg-[url('/kisco.jpg')] bg-center min-h-screen grid justify-center animate-slide-bg">
+      <div className="relative bg-[url('/kisco.jpg')]  min-h-screen grid justify-center animate-slide-bg bg-left">
+      <div ></div>
         <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent"></div>
         <h1 className="relative z-10 text-white text-8xl font-bold text-center mt-8">
           MALINHA PT.2

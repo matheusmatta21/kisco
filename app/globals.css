@@ -46,11 +46,11 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  --animate-slide-bg: slide-bg 45s linear infinite;
+  --animate-slide-bg: slide-bg 40s linear infinite;
 
   @keyframes slide-bg {
     0% { background-position: 0 0; }
-    100% { background-position: -1000px 0; }
+    100% { background-position: -640px 0; }
   }
 }
 
