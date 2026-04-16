@@ -47,10 +47,22 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 
   --animate-slide-bg: slide-bg 40s linear infinite;
+  --animate-spin-slow: spin-slow 12s linear infinite;
+  --animate-float: float 4s ease-in-out infinite;
 
   @keyframes slide-bg {
     0% { background-position: 0 0; }
     100% { background-position: -640px 0; }
+  }
+
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(-3deg); }
   }
 }
 

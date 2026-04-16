@@ -79,7 +79,6 @@ export function UserCard({
                   <p className="truncate text-sm font-medium text-white">
                     {t.title}
                   </p>
-                  <p className="truncate text-[11px] text-white/50">KISCO</p>
                 </div>
               </li>
             ))}
