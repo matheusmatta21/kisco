@@ -1,11 +1,13 @@
 import { UserCard } from "@/components/UserCard";
 import { Countdown } from "@/components/Countdown";
+import { FloatingLogin } from "@/components/FloatingLogin";
 
 export default function Home() {
   return (
     <div className="min-h-screen ">
+      <FloatingLogin />
       <div className="relative bg-[url('/kisco.jpg')]  min-h-screen grid justify-center animate-slide-bg bg-left">
-        <div ></div>
+        <div></div>
         <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent"></div>
 
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-6 sm:gap-10 px-4 sm:px-6 py-12 sm:py-16 w-full">
@@ -14,7 +16,7 @@ export default function Home() {
             style={{ textShadow: "0 4px 24px rgba(0,0,0,0.5)" }}
           >
             MALINHA
-            <span className="block font-[family-name:var(--font-display)] text-3xl sm:text-5xl md:text-7xl tracking-[0.25em]  mt-2 sm:mt-3 text-white">
+            <span className="block font-[family-name:var(--font-display)] text-3xl sm:text-5xl md:text-7xl  mt-2 sm:mt-3 text-white">
               PT.2
             </span>
           </h1>
@@ -33,12 +35,12 @@ export default function Home() {
         <div className="pointer-events-none absolute top-1/3 left-0 h-[300px] w-[400px] rounded-full bg-purple-600/20 blur-[120px]" />
 
         <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 p-6 sm:p-10">
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
-        <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
         </div>
       </div>
     </div>
