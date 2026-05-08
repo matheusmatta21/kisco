@@ -1,9 +1,7 @@
 import Link from "next/link";
 
 export default function LoginPage() {
-  // Backend integration point: replace href with your Spotify OAuth authorize URL
-  // e.g. /api/auth/spotify  -> redirects to accounts.spotify.com/authorize
-  const spotifyAuthHref = "/api/auth/spotify";
+  const spotifyAuthHref = `${process.env.NEXT_PUBLIC_API_URL}/auth/spotify`;
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#0a0613] text-white">
@@ -49,17 +47,15 @@ export default function LoginPage() {
             <div className="pointer-events-none absolute -top-24 -left-16 h-52 w-52 rounded-full bg-white/10 blur-2xl" />
 
             <div className="relative flex flex-col items-center gap-6 text-center">
-
               <div className="space-y-2">
                 <h2 className="text-2xl sm:text-3xl font-semibold">
                   Entre com sua conta
                 </h2>
                 <p className="text-sm text-white/70 max-w-sm">
-                  Conecte seu Spotify                   
+                  Conecte seu Spotify
                 </p>
               </div>
 
-              {/* Spotify CTA — hit backend route that redirects to Spotify OAuth */}
               <a
                 href={spotifyAuthHref}
                 className="group/btn relative inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#1DB954] px-6 py-3.5 text-sm font-semibold text-black shadow-[0_8px_24px_rgba(29,185,84,0.35)] transition-all hover:bg-[#1ed760] hover:shadow-[0_12px_36px_rgba(29,185,84,0.55)] active:scale-[0.98]"
