@@ -1,3 +1,5 @@
+import { cookies } from "next/headers";
+
 export type Track = {
   name: string;
   artists: string[];
@@ -29,6 +31,34 @@ type ApiUser = {
 };
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+export async function getMe(): Promise<User | null> {
+  if (!API_URL) throw new Error("NEXT_PUBLIC_API_URL não definida");
+  const cookieStore = await cookies();
+  const cookie = cookieStore.toString();
+  const res = await fetch(`${API_URL}/auth/me`, {
+    headers: cookie ? { cookie } : {},
+    cache: "no-store",
+  });
+  if (res.status === 401) return null;
+  if (!res.ok) {
+    throw new Error(`getMe ${res.status}: ${await res.text()}`);
+  }
+  const u: ApiUser = await res.json();
+  return {
+    spotifyId: u.spotify_id,
+    displayName: u.display_name,
+    avatarUrl: u.avatar_url,
+    tracks:
+      u.tracks?.map((t) => ({
+        name: t.name,
+        artists: t.artists,
+        playedAt: t.played_at,
+        albumName: t.album_name,
+        imageUrl: t.image_url,
+      })) ?? [],
+  };
+}
 
 export async function getUsers(): Promise<User[]> {
   if (!API_URL) throw new Error("NEXT_PUBLIC_API_URL não definida");
