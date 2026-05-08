@@ -1,11 +1,19 @@
 import Link from "next/link";
+import { getMe } from "@/lib/api";
+import { UserMenu } from "./UserMenu";
 
-export function FloatingLogin() {
+export async function FloatingLogin() {
+  const me = await getMe();
+
+  if (me) {
+    return <UserMenu displayName={me.displayName} avatarUrl={me.avatarUrl} />;
+  }
+
   return (
     <Link
       href="/login"
       aria-label="Ir para o login"
-      className="group fixed top-4 left-4 sm:top-6 sm:left-6 z-50 block"
+      className="group fixed top-4 right-4 sm:top-6 sm:right-6 z-50 block"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
