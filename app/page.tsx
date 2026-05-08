@@ -1,8 +1,12 @@
 import { UserCard } from "@/components/UserCard";
 import { Countdown } from "@/components/Countdown";
 import { FloatingLogin } from "@/components/FloatingLogin";
+import { getUsers } from "@/lib/api";
 
-export default function Home() {
+export default async function Home() {
+  const data = await getUsers();
+  console.log("Fetched users:", data);
+
   return (
     <div className="min-h-screen ">
       <FloatingLogin />
@@ -34,14 +38,22 @@ export default function Home() {
         <div className="pointer-events-none absolute bottom-0 right-0 h-[400px] w-[600px] rounded-full bg-[#22e3ff]/15 blur-[140px]" />
         <div className="pointer-events-none absolute top-1/3 left-0 h-[300px] w-[400px] rounded-full bg-purple-600/20 blur-[120px]" />
 
-        <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 p-6 sm:p-10">
-          <UserCard />
-          <UserCard />
-          <UserCard />
-          <UserCard />
-          <UserCard />
-          <UserCard />
-        </div>
+        {data.length === 0 ? (
+          <div className="relative flex flex-col items-center justify-center gap-3 px-6 py-24 text-center">
+            <p className="font-[family-name:var(--font-mono-display)] text-[10px] uppercase tracking-[0.4em] text-white/50">
+              Ninguém conectado ainda
+            </p>
+            <p className="max-w-md text-sm text-white/70">
+              Seja o primeiro a conectar seu Spotify e aparecer aqui.
+            </p>
+          </div>
+        ) : (
+          <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 p-6 sm:p-10">
+            {data.map((u) => (
+              <UserCard key={u.spotifyId} {...u} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
