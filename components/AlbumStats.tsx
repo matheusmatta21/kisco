@@ -6,10 +6,10 @@ import {
 } from "@/lib/stats";
 import { PeriodGroup } from "./album-stats/PeriodGroup";
 import { RankingColumn } from "./album-stats/RankingColumn";
-import { SubsectionTitle } from "./album-stats/SubsectionTitle";
 import { TopListenerCard } from "./album-stats/TopListenerCard";
 import { TopTrackCard } from "./album-stats/TopTrackCard";
 import { TopTracksCard } from "./album-stats/TopTracksCard";
+import { SectionHero } from "./SectionHero";
 
 function unwrap<T>(r: PromiseSettledResult<T>): T | null {
   return r.status === "fulfilled" ? r.value : null;
@@ -114,17 +114,7 @@ export async function AlbumStats() {
       <div className="pointer-events-none absolute bottom-1/3 left-0 h-[300px] w-[400px] rounded-full bg-purple-600/20 blur-[120px]" />
 
       <div className="relative mx-auto max-w-6xl">
-        <header className="mb-8 sm:mb-10">
-          <p className="font-[family-name:var(--font-mono-display)] text-xs uppercase tracking-[0.3em] text-white/75 sm:text-sm">
-            Estatísticas
-          </p>
-          <h2
-            className="mt-2 font-[family-name:var(--font-display)] text-3xl sm:text-4xl uppercase tracking-wide text-white"
-            style={{ textShadow: "0 4px 24px rgba(0,0,0,0.5)" }}
-          >
-            Gerais
-          </h2>
-        </header>
+        <SectionHero kicker="Estatísticas" title="Gerais" />
 
         <div className="space-y-10 sm:space-y-12">
           <PeriodGroup title={weekTitle}>
@@ -161,7 +151,7 @@ export async function AlbumStats() {
           </PeriodGroup>
 
           <div id="top-10" className="scroll-mt-20">
-            <SubsectionTitle title="Top 10 do Malinha" />
+            <SectionHero kicker="Mais tocadas" title="Top 10 do Malinha" />
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
               <TopTracksCard
                 title={weekTitle}
@@ -183,17 +173,7 @@ export async function AlbumStats() {
         </div>
 
         <div id="ranking" className="mt-10 scroll-mt-20 sm:mt-14">
-          <header className="mb-6 sm:mb-8">
-            <p className="font-[family-name:var(--font-mono-display)] text-xs uppercase tracking-[0.3em] text-white/75 sm:text-sm">
-              Ranking
-            </p>
-            <h3
-              className="mt-2 font-[family-name:var(--font-display)] text-2xl sm:text-3xl uppercase tracking-wide text-white"
-              style={{ textShadow: "0 4px 24px rgba(0,0,0,0.5)" }}
-            >
-              Top ouvintes do álbum
-            </h3>
-          </header>
+          <SectionHero kicker="Ranking" title="Top ouvintes do álbum" />
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
             <RankingColumn

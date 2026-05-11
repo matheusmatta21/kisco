@@ -1,3 +1,4 @@
+import { SectionHero } from "@/components/SectionHero";
 import { UserCard } from "@/components/UserCard";
 import { getMe, getUsers } from "@/lib/api";
 
@@ -14,17 +15,7 @@ export async function UsersSection() {
       <div className="pointer-events-none absolute top-1/3 left-0 h-[300px] w-[400px] rounded-full bg-purple-600/20 blur-[120px]" />
 
       <div className="relative mx-auto max-w-6xl">
-        <header className="mb-8 sm:mb-10">
-          <p className="font-[family-name:var(--font-mono-display)] text-xs uppercase tracking-[0.3em] text-white/75 sm:text-sm">
-            Usuários
-          </p>
-          <h2
-            className="mt-2 font-[family-name:var(--font-display)] text-3xl sm:text-4xl uppercase tracking-wide text-white"
-            style={{ textShadow: "0 4px 24px rgba(0,0,0,0.5)" }}
-          >
-            Conectados
-          </h2>
-        </header>
+        <SectionHero kicker="Usuários" title="Conectados" />
 
         {users.length === 0 ? (
           <div className="flex flex-col items-center justify-center gap-3 py-12 text-center">
