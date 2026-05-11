@@ -1,16 +1,18 @@
-import { UserCard } from "@/components/UserCard";
 import { Countdown } from "@/components/Countdown";
 import { FloatingLogin } from "@/components/FloatingLogin";
-import { getUsers } from "@/lib/api";
+import { AlbumStats } from "@/components/AlbumStats";
+import { Sidebar } from "@/components/Sidebar";
+import { UsersSection } from "@/components/UsersSection";
 
-export default async function Home() {
-  const data = await getUsers();
-  console.log("Fetched users:", data);
-
+export default function Home() {
   return (
     <div className="min-h-screen ">
+      <Sidebar />
       <FloatingLogin />
-      <div className="relative bg-[url('/kisco.jpg')]  min-h-screen grid justify-center animate-slide-bg bg-left">
+      <div
+        id="topo"
+        className="relative bg-[url('/kisco.jpg')]  min-h-screen grid justify-center animate-slide-bg bg-left"
+      >
         <div></div>
         <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent"></div>
 
@@ -32,29 +34,8 @@ export default async function Home() {
           </span>
         </div>
       </div>
-      <div className="relative bg-[#0a0613] overflow-hidden">
-        {/* ambient glow to continue the disco mood */}
-        <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-[500px] w-[900px] rounded-full bg-[#ff2d95]/20 blur-[140px]" />
-        <div className="pointer-events-none absolute bottom-0 right-0 h-[400px] w-[600px] rounded-full bg-[#22e3ff]/15 blur-[140px]" />
-        <div className="pointer-events-none absolute top-1/3 left-0 h-[300px] w-[400px] rounded-full bg-purple-600/20 blur-[120px]" />
-
-        {data.length === 0 ? (
-          <div className="relative flex flex-col items-center justify-center gap-3 px-6 py-24 text-center">
-            <p className="font-[family-name:var(--font-mono-display)] text-[10px] uppercase tracking-[0.4em] text-white/50">
-              Ninguém conectado ainda
-            </p>
-            <p className="max-w-md text-sm text-white/70">
-              Seja o primeiro a conectar seu Spotify e aparecer aqui.
-            </p>
-          </div>
-        ) : (
-          <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 p-6 sm:p-10">
-            {data.map((u) => (
-              <UserCard key={u.spotifyId} {...u} />
-            ))}
-          </div>
-        )}
-      </div>
+      <UsersSection />
+      <AlbumStats />
     </div>
   );
 }
