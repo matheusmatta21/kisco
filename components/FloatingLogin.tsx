@@ -15,7 +15,6 @@ export async function FloatingLogin() {
       aria-label="Ir para o login"
       className="group fixed top-4 right-4 sm:top-6 sm:right-6 z-50 block"
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/login.png"
         alt=""

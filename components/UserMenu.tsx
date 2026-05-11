@@ -9,7 +9,6 @@ type Props = {
 export function UserMenu({ displayName, avatarUrl }: Props) {
   return (
     <div className="fixed top-4 right-4 sm:top-6 sm:right-6 z-50 flex items-center gap-2 rounded-full border border-white/15 bg-[#120a1f]/80 p-1.5 pr-3 shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={avatarUrl || "/kisco.jpg"}
         alt={displayName}

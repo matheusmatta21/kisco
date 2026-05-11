@@ -9,7 +9,8 @@ export type Track = {
 };
 
 export type User = {
-  spotifyId: string;
+  provider: string;
+  providerUserId: string;
   displayName: string;
   avatarUrl: string | null;
   tracks: Track[];
@@ -24,11 +25,14 @@ type ApiTrack = {
 };
 
 type ApiUser = {
-  spotify_id: string;
+  provider: string;
+  provider_user_id: string;
   display_name: string;
   avatar_url: string | null;
   tracks: ApiTrack[];
 };
+
+
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -46,7 +50,8 @@ export async function getMe(): Promise<User | null> {
   }
   const u: ApiUser = await res.json();
   return {
-    spotifyId: u.spotify_id,
+    provider: u.provider,
+    providerUserId: u.provider_user_id,
     displayName: u.display_name,
     avatarUrl: u.avatar_url,
     tracks:
@@ -69,7 +74,8 @@ export async function getUsers(): Promise<User[]> {
   const json: { users: ApiUser[] } = await res.json();
 
   return json.users.map((u) => ({
-    spotifyId: u.spotify_id,
+    provider: u.provider,
+    providerUserId: u.provider_user_id,
     displayName: u.display_name,
     avatarUrl: u.avatar_url,
     tracks: u.tracks.map((t) => ({
@@ -81,3 +87,4 @@ export async function getUsers(): Promise<User[]> {
     })),
   }));
 }
+

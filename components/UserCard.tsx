@@ -1,6 +1,13 @@
 import type { User } from "@/lib/api";
 
-export function UserCard({ displayName, avatarUrl, tracks }: User) {
+type Props = User & { isMe?: boolean };
+
+export function UserCard({
+  displayName,
+  avatarUrl,
+  tracks,
+  isMe = false,
+}: Props) {
   return (
     <div className="group relative mx-auto w-full max-w-sm">
       <div className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-br from-[#ff2d95]/40 via-transparent to-[#22e3ff]/40 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
@@ -12,17 +19,22 @@ export function UserCard({ displayName, avatarUrl, tracks }: User) {
         <div className="relative flex items-center gap-3 px-5 pt-5 pb-4">
           <div className="relative">
             <div className="absolute -inset-0.5 rounded-full bg-gradient-to-br from-[#ff2d95] to-[#22e3ff] blur-[2px] opacity-80" />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
+
             <img
               src={avatarUrl || "/default-avatar.png"}
               alt={displayName}
               className="relative h-11 w-11 rounded-full object-cover ring-2 ring-black/40"
             />
           </div>
-          <div className="flex flex-col min-w-0">
+          <div className="flex min-w-0 flex-1 items-center justify-between gap-2">
             <span className="truncate text-sm font-semibold text-white">
               {displayName}
             </span>
+            {isMe && (
+              <span className="text-md mr-4 font-medium text-[#ff2d95]">
+                (Você)
+              </span>
+            )}
           </div>
         </div>
 
@@ -31,7 +43,7 @@ export function UserCard({ displayName, avatarUrl, tracks }: User) {
         <div className="relative px-5 py-4">
           <p className="mb-3 text-[10px] uppercase tracking-[0.25em] text-white/60">
             5 músicas mais recentes de{" "}
-            <span className="text-[#ff2d95]">KISCO</span>
+            <span className="text-[#2dd5ff]">KISCO</span>
           </p>
 
           {tracks.length === 0 ? (
@@ -48,7 +60,7 @@ export function UserCard({ displayName, avatarUrl, tracks }: User) {
                   <span className="w-4 text-right text-[10px] font-medium tabular-nums text-white/40">
                     {i + 1}
                   </span>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
+
                   <img
                     src={t.imageUrl}
                     alt={t.name}
