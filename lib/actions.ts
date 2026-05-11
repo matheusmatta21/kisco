@@ -4,10 +4,10 @@ import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.API_URL;
 
 export async function logout() {
-  if (!API_URL) throw new Error("NEXT_PUBLIC_API_URL não definida");
+  if (!API_URL) throw new Error("API_URL não definida");
   const cookieStore = await cookies();
   const cookie = cookieStore.toString();
 

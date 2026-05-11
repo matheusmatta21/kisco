@@ -34,10 +34,10 @@ type ApiUser = {
 
 
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.API_URL;
 
 export async function getMe(): Promise<User | null> {
-  if (!API_URL) throw new Error("NEXT_PUBLIC_API_URL não definida");
+  if (!API_URL) throw new Error("API_URL não definida");
   const cookieStore = await cookies();
   const cookie = cookieStore.toString();
   const res = await fetch(`${API_URL}/auth/me`, {
@@ -66,7 +66,7 @@ export async function getMe(): Promise<User | null> {
 }
 
 export async function getUsers(): Promise<User[]> {
-  if (!API_URL) throw new Error("NEXT_PUBLIC_API_URL não definida");
+  if (!API_URL) throw new Error("API_URL não definida");
   const res = await fetch(`${API_URL}/users`, { cache: "no-store" });
   if (!res.ok) {
     throw new Error(`getUsers ${res.status}: ${await res.text()}`);

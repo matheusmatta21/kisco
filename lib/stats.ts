@@ -102,10 +102,10 @@ type ApiRankingResponse = ApiStatsWindow & {
   ranking: ApiRankingEntry[];
 };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.API_URL;
 
 async function statsFetch<T>(path: string): Promise<T> {
-  if (!API_URL) throw new Error("NEXT_PUBLIC_API_URL não definida");
+  if (!API_URL) throw new Error("API_URL não definida");
   const cookieStore = await cookies();
   const cookie = cookieStore.toString();
   const res = await fetch(`${API_URL}${path}`, {
