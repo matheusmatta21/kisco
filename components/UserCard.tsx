@@ -21,7 +21,7 @@ export function UserCard({
             <div className="absolute -inset-0.5 rounded-full bg-gradient-to-br from-[#ff2d95] to-[#22e3ff] blur-[2px] opacity-80" />
 
             <img
-              src={avatarUrl || "/default-avatar.png"}
+              src={avatarUrl || "/kisco.jpg"}
               alt={displayName}
               className="relative h-11 w-11 rounded-full object-cover ring-2 ring-black/40"
             />
