@@ -73,18 +73,19 @@ export async function getUsers(): Promise<User[]> {
   }
   const json: { users: ApiUser[] } = await res.json();
 
-  return json.users.map((u) => ({
+  return (json.users ?? []).map((u) => ({
     provider: u.provider,
     providerUserId: u.provider_user_id,
     displayName: u.display_name,
     avatarUrl: u.avatar_url,
-    tracks: u.tracks.map((t) => ({
-      name: t.name,
-      artists: t.artists,
-      playedAt: t.played_at,
-      albumName: t.album_name,
-      imageUrl: t.image_url,
-    })),
+    tracks:
+      u.tracks?.map((t) => ({
+        name: t.name,
+        artists: t.artists,
+        playedAt: t.played_at,
+        albumName: t.album_name,
+        imageUrl: t.image_url,
+      })) ?? [],
   }));
 }
 
