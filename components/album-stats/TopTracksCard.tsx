@@ -1,4 +1,5 @@
 import { ListMusic, Music } from "lucide-react";
+import { PlayButton } from "@/components/PlayButton";
 import type { TopTracksResponse } from "@/lib/stats";
 import { CardHeader } from "./CardHeader";
 import { ACCENT, CardShell, type Accent } from "./CardShell";
@@ -32,7 +33,8 @@ export function TopTracksCard({
             return (
               <li
                 key={`${title}-${e.track.trackKey}`}
-                className="flex items-center gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-white/5"
+                tabIndex={0}
+                className="group/row flex cursor-pointer items-center gap-3 rounded-lg px-2 py-2 transition-colors outline-none hover:bg-white/5 focus-visible:bg-white/5"
               >
                 <span
                   className={`w-5 text-right font-[family-name:var(--font-mono-display)] text-xs tabular-nums ${
@@ -61,12 +63,16 @@ export function TopTracksCard({
                   </p>
                 </div>
                 <span
-                  className={`font-[family-name:var(--font-mono-display)] text-xs tabular-nums ${
+                  className={`font-[family-name:var(--font-mono-display)] text-xs tabular-nums group-hover/row:hidden group-focus-within/row:hidden ${
                     isTop ? ACCENT[accent].accentText : "text-white/60"
                   }`}
                 >
                   {fmt.format(e.playCount)}
                 </span>
+                <PlayButton
+                  name={e.track.trackName}
+                  artists={e.track.artists}
+                />
               </li>
             );
           })}

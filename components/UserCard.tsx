@@ -1,6 +1,25 @@
+import { PlayButton } from "@/components/PlayButton";
 import type { User } from "@/lib/api";
 
 type Props = User & { isMe?: boolean };
+
+function timeAgo(iso: string): string {
+  const then = new Date(iso).getTime();
+  if (Number.isNaN(then)) return "";
+
+  const sec = Math.max(0, Math.floor((Date.now() - then) / 1000));
+  const min = Math.floor(sec / 60);
+  const hr = Math.floor(min / 60);
+  const day = Math.floor(hr / 24);
+
+  if (sec < 60) return "agora";
+  if (min < 60) return `há ${min}min`;
+  if (hr < 24) return `há ${hr}h`;
+  if (day < 7) return `há ${day}d`;
+  if (day < 30) return `há ${Math.floor(day / 7)}sem`;
+  if (day < 365) return `há ${Math.floor(day / 30)}mês`;
+  return `há ${Math.floor(day / 365)}a`;
+}
 
 export function UserCard({
   displayName,
@@ -46,35 +65,46 @@ export function UserCard({
             <span className="text-[#2dd5ff]">KISCO</span>
           </p>
 
-          {tracks.length === 0 ? (
-            <p className="px-2 py-3 text-xs text-white/50">
-              Ainda sem plays do álbum.
-            </p>
-          ) : (
-            <ul className="flex flex-col gap-1">
-              {tracks.slice(0, 5).map((t, i) => (
-                <li
-                  key={t.playedAt}
-                  className="group/row flex items-center gap-3 rounded-lg px-2 py-1.5 transition-colors hover:bg-white/5"
-                >
-                  <span className="w-4 text-right text-[10px] font-medium tabular-nums text-white/40">
-                    {i + 1}
-                  </span>
+          <div className="sm:min-h-[276px]">
+            {tracks.length === 0 ? (
+              <p className="px-2 py-3 text-xs text-white/50">
+                Ainda sem plays do álbum.
+              </p>
+            ) : (
+              <ul className="flex flex-col gap-1">
+                {tracks.slice(0, 5).map((t, i) => (
+                  <li
+                    key={t.playedAt}
+                    tabIndex={0}
+                    className="group/row flex cursor-pointer items-center gap-3 rounded-lg px-2 py-1.5 transition-colors outline-none hover:bg-white/5 focus-visible:bg-white/5"
+                  >
+                    <span className="w-4 text-right text-[10px] font-medium tabular-nums text-white/40">
+                      {i + 1}
+                    </span>
 
-                  <img
-                    src={t.imageUrl}
-                    alt={t.name}
-                    className="h-10 w-10 flex-shrink-0 rounded-md object-cover ring-1 ring-white/10"
-                  />
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-white">
-                      {t.name}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
+                    <img
+                      src={t.imageUrl}
+                      alt={t.name}
+                      className="h-10 w-10 flex-shrink-0 rounded-md object-cover ring-1 ring-white/10"
+                    />
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium text-white">
+                        {t.name}
+                      </p>
+                    </div>
+                    <span className="flex-shrink-0 whitespace-nowrap font-[family-name:var(--font-mono-display)] text-[10px] tabular-nums text-white/40 group-hover/row:hidden group-focus-within/row:hidden">
+                      {timeAgo(t.playedAt)}
+                    </span>
+                    <PlayButton
+                      name={t.name}
+                      artists={t.artists}
+                      url={t.externalUrl}
+                    />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       </article>
     </div>

@@ -6,6 +6,7 @@ export type Track = {
   playedAt: string;
   albumName: string;
   imageUrl: string;
+  externalUrl: string | null;
 };
 
 export type User = {
@@ -22,6 +23,7 @@ type ApiTrack = {
   played_at: string;
   album_name: string;
   image_url: string;
+  external_url: string | null;
 };
 
 type ApiUser = {
@@ -31,8 +33,6 @@ type ApiUser = {
   avatar_url: string | null;
   tracks: ApiTrack[];
 };
-
-
 
 const API_URL = process.env.API_URL;
 
@@ -61,6 +61,7 @@ export async function getMe(): Promise<User | null> {
         playedAt: t.played_at,
         albumName: t.album_name,
         imageUrl: t.image_url,
+        externalUrl: t.external_url,
       })) ?? [],
   };
 }
@@ -85,7 +86,7 @@ export async function getUsers(): Promise<User[]> {
         playedAt: t.played_at,
         albumName: t.album_name,
         imageUrl: t.image_url,
+        externalUrl: t.external_url,
       })) ?? [],
   }));
 }
-

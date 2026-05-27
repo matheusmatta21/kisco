@@ -1,4 +1,5 @@
 import { Headphones } from "lucide-react";
+import { PlayButton } from "@/components/PlayButton";
 import type { TopTrackResponse } from "@/lib/stats";
 import { CardHeader } from "./CardHeader";
 import { ACCENT, CardShell, type Accent } from "./CardShell";
@@ -27,7 +28,10 @@ export function TopTrackCard({
         <FallbackBody message="Sem plays registrados nesta janela." />
       ) : (
         <>
-          <div className="flex items-center gap-3">
+          <div
+            tabIndex={0}
+            className="group/row flex cursor-pointer items-center gap-3 rounded-lg outline-none"
+          >
             {data.track.imageUrl ? (
               <img
                 src={data.track.imageUrl}
@@ -47,6 +51,10 @@ export function TopTrackCard({
                 {data.track.artists}
               </p>
             </div>
+            <PlayButton
+              name={data.track.trackName}
+              artists={data.track.artists}
+            />
           </div>
           <p
             className={`mt-4 font-[family-name:var(--font-mono-display)] text-[10px] uppercase tracking-[0.25em] ${ACCENT[accent].accentText}`}
